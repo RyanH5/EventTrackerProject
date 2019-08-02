@@ -8,6 +8,4 @@ public interface FourteenerService {
 
 	List<Fourteener> index();
 
-	Fourteener show(int id);
-
 }

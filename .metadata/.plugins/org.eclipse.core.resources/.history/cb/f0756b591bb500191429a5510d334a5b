@@ -21,6 +21,6 @@ public class FourteenerController {
 	
 	@GetMapping("fourteeners")
 	public List<Fourteener> getAllFourteeners() {
-		return svc.index();
+		return s
 	}
 }

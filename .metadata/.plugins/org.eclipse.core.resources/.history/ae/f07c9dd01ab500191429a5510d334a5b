@@ -1,7 +1,6 @@
 package com.skilldistillery.fourteeners.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +17,5 @@ public class FourteenerServiceImpl implements FourteenerService {
 	@Override
 	public List<Fourteener> index() {
 		return repo.findAll();
-	}
-	
-	@Override
-	public Fourteener show(int id) {
-		Optional<Fourteener> opt = repo.findById(id);
-		if (opt.isPresent()) {
-			return opt.get();
-		}
-		return null;
-
 	}
 }
