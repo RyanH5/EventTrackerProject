@@ -1,0 +1,8 @@
+package com.skilldistillery.fourteeners.entities;
+
+import javax.persistence.*;
+
+@Entity
+public class Fourteener {
+
+}
