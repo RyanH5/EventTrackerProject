@@ -29,6 +29,4 @@ public class FourteenerServiceImpl implements FourteenerService {
 		return null;
 
 	}
-	
-	
 }
