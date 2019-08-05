@@ -36,7 +36,7 @@ public class FourteenerServiceImpl implements FourteenerService {
 		Fourteener managedFourteener = null;
 		if (opt.isPresent() ) {
 			managedFourteener = opt.get();
-			managedFourteener.setComplete(mtn.isComplete());
+			managedFourteener.setComplete(mtn.isComplete()));
 			managedFourteener.setElevation(mtn.getElevation());
 			managedFourteener.setPeak(mtn.getPeak());
 			managedFourteener.setRange(mtn.getRange());

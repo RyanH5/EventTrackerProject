@@ -41,16 +41,20 @@ public class FourteenerController {
 		return mtn;
 	}
 	
-	@DeleteMapping("/fourteeners/{id}")
-	public Boolean deleteFourteener(@PathVariable Integer id, HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			svc.delete(id);
-			return true;
-		}	catch (Exception e) {
-			resp.setStatus(404);
-			return false;
-		}
-	}
+//	@PutMapping("/students/{id}")
+//	public ResponseEntity<Object> updateStudent(@RequestBody Student student, @PathVariable long id) {
+//
+//		Optional<Student> studentOptional = studentRepository.findById(id);
+//
+//		if (!studentOptional.isPresent())
+//			return ResponseEntity.notFound().build();
+//
+//		student.setId(id);
+//		
+//		studentRepository.save(student);
+//
+//		return ResponseEntity.noContent().build();
+//	}
 	
 	@PutMapping("/fourteeners/{id}")
 	public Fourteener update(@PathVariable("id") int id, @RequestBody Fourteener mtn, HttpServletRequest req, HttpServletResponse resp) {
