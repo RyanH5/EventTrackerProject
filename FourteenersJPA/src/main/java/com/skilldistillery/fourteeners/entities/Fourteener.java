@@ -6,6 +6,8 @@ import javax.persistence.*;
 public class Fourteener {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private int rank;
 	private String peak;
 	private String elevation;
@@ -65,10 +67,20 @@ public class Fourteener {
 		this.complete = complete;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Fourteener [rank=");
+		builder.append("Fourteener [id=");
+		builder.append(id);
+		builder.append(", rank=");
 		builder.append(rank);
 		builder.append(", peak=");
 		builder.append(peak);
@@ -82,13 +94,17 @@ public class Fourteener {
 		return builder.toString();
 	}
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + rank;
+		result = prime * result + id;
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -99,10 +115,12 @@ public class Fourteener {
 		if (getClass() != obj.getClass())
 			return false;
 		Fourteener other = (Fourteener) obj;
-		if (rank != other.rank)
+		if (id != other.id)
 			return false;
 		return true;
 	}
+
+	
 	
 	
 

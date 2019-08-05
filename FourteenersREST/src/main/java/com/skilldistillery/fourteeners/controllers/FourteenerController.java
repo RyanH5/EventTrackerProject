@@ -55,12 +55,14 @@ public class FourteenerController {
 	@PostMapping("fourteeners")
 	public Fourteener createFourteener(@RequestBody Fourteener fourteener, HttpServletRequest req, HttpServletResponse resp) {
 		try {
+			System.out.println(fourteener);
 			svc.create(fourteener);
+			System.out.println(fourteener);
+			
 			resp.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/");
-//			url.append(fourteener.getId());
-			url.append(fourteener.getRank());
+			url.append(fourteener.getId());
 			String newAddrURL = url.toString();
 			resp.addHeader("Location", newAddrURL);
 		}	catch (Exception e) {
