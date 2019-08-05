@@ -10,8 +10,4 @@ public interface FourteenerService {
 
 	Fourteener show(int id);
 
-	Fourteener update(int id, Fourteener mtn);
-
-	Fourteener create(Fourteener ft, int id);
-
 }

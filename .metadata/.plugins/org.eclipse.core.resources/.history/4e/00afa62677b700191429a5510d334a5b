@@ -57,18 +57,6 @@ public class FourteenerServiceImpl implements FourteenerService {
 	}
 	
 	
-	public Boolean delete(Integer id) {
-		Optional<Fourteener> opt = repo.findById(id);
-		Fourteener managedFt = null;
-		if (opt.isPresent()) {
-			managedFt = opt.get();
-			repo.delete(managedFt);
-			return true;
-		}
-		
-		return false;
- 	}
-	
 	
 
 	

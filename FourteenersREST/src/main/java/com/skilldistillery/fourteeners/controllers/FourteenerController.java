@@ -23,7 +23,7 @@ public class FourteenerController {
 	}
 	
 	@GetMapping("fourteeners")
-	public List<Fourteener> getAllFourteeners(HttpServletRequest req, HttpServletResponse resp) {
+	public List<Fourteener> getAll(HttpServletRequest req, HttpServletResponse resp) {
 		List<Fourteener> fourteeners = svc.index();
 		if (fourteeners == null) {
 			resp.setStatus(404);
@@ -32,12 +32,36 @@ public class FourteenerController {
 	}
 	
 	@GetMapping("fourteeners/{id}")
-	public Fourteener getFourteener(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
+	public Fourteener get(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
 		Fourteener mtn = svc.show(id);
 		if (mtn == null) {
 			resp.setStatus(404);
 		}
 		
 		return mtn;
+	}
+	
+//	@PutMapping("/students/{id}")
+//	public ResponseEntity<Object> updateStudent(@RequestBody Student student, @PathVariable long id) {
+//
+//		Optional<Student> studentOptional = studentRepository.findById(id);
+//
+//		if (!studentOptional.isPresent())
+//			return ResponseEntity.notFound().build();
+//
+//		student.setId(id);
+//		
+//		studentRepository.save(student);
+//
+//		return ResponseEntity.noContent().build();
+//	}
+	
+	@PutMapping("/fourteeners/{id}")
+	public Fourteener update(@PathVariable("id") int id, @RequestBody Fourteener mtn, HttpServletRequest req, HttpServletResponse resp) {
+		Fourteener fourteener = svc.update(id, mtn);
+		if (mtn == null) {
+			resp.setStatus(404);
+		}
+		return fourteener;
 	}
 }

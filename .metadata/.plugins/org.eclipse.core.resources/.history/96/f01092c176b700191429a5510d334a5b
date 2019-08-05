@@ -50,24 +50,11 @@ public class FourteenerServiceImpl implements FourteenerService {
 		return null;
 	}
 	
-	@Override
-	public Fourteener create(Fourteener ft, int id) {
-		ft = repo.saveAndFlush(ft);
-		return ft;
-	}
+//	@Override
+//	public Fourteener create(Fourteener ft, int id) {
+//		
+//	}
 	
-	
-	public Boolean delete(Integer id) {
-		Optional<Fourteener> opt = repo.findById(id);
-		Fourteener managedFt = null;
-		if (opt.isPresent()) {
-			managedFt = opt.get();
-			repo.delete(managedFt);
-			return true;
-		}
-		
-		return false;
- 	}
 	
 	
 

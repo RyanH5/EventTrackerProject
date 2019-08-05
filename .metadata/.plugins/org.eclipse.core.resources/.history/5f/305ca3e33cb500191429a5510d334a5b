@@ -33,42 +33,26 @@ public class FourteenerServiceImpl implements FourteenerService {
 	@Override
 	public Fourteener update(int id, Fourteener mtn) {
 		Optional<Fourteener> opt = repo.findById(id);
-		Fourteener managedFourteener = null;
 		if (opt.isPresent() ) {
-			managedFourteener = opt.get();
-			managedFourteener.setComplete(mtn.isComplete()));
-			managedFourteener.setElevation(mtn.getElevation());
-			managedFourteener.setPeak(mtn.getPeak());
-			managedFourteener.setRange(mtn.getRange());
-			managedFourteener.setRank(mtn.getRank());
+			System.out.println(opt);
+			opt.get().setComplete(mtn.isComplete());
+			opt.get().setElevation(mtn.getElevation());
+			opt.get().setPeak(mtn.getPeak());
+			opt.get().setRange(mtn.getRange());
+			opt.get().setRank(mtn.getRank());
 			System.out.println("=============================");
 			System.out.println(opt);
-			System.out.println("MTN" + mtn);
+			repo.saveAndFlush(mtn);
 		
-			return repo.saveAndFlush(opt.get());
+			return mtn;
 		}
 		return null;
 	}
 	
 	@Override
 	public Fourteener create(Fourteener ft, int id) {
-		ft = repo.saveAndFlush(ft);
-		return ft;
-	}
-	
-	
-	public Boolean delete(Integer id) {
-		Optional<Fourteener> opt = repo.findById(id);
-		Fourteener managedFt = null;
-		if (opt.isPresent()) {
-			managedFt = opt.get();
-			repo.delete(managedFt);
-			return true;
-		}
 		
-		return false;
- 	}
-	
+	}
 	
 
 	
