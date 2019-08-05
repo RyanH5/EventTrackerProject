@@ -53,14 +53,13 @@ public class FourteenerController {
 	}
 	
 	@PostMapping("fourteeners")
-	public Fourteener createFourteener(@RequestBody Fourteener fourteener, HttpServletRequest req, HttpServletResponse resp) {
+	public createFourteener(@RequestBody Fourteener fourteener, HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			svc.create(fourteener);
 			resp.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/");
-//			url.append(fourteener.getId());
-			url.append(fourteener.getRank());
+//			url.append(fourteener.getId())fourteener;
 			String newAddrURL = url.toString();
 			resp.addHeader("Location", newAddrURL);
 		}	catch (Exception e) {
@@ -72,16 +71,11 @@ public class FourteenerController {
 	}
 	
 	@PutMapping("fourteeners/{id}")
-	public Fourteener replace(@PathVariable("id") int id, @RequestBody Fourteener mtn, HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			mtn = svc.update(id, mtn);
-			StringBuffer url = req.getRequestURL();
-			String newAddrURL = url.toString();
-			resp.addHeader("URL", newAddrURL);
-		}	catch (Exception e) {
+	public Fourteener update(@PathVariable("id") int id, @RequestBody Fourteener mtn, HttpServletRequest req, HttpServletResponse resp) {
+		Fourteener fourteener = svc.update(id, mtn);
+		if (mtn == null) {
 			resp.setStatus(404);
-			
 		}
-		return mtn;
+		return fourteener;
 	}
 }

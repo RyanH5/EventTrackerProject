@@ -72,16 +72,11 @@ public class FourteenerController {
 	}
 	
 	@PutMapping("fourteeners/{id}")
-	public Fourteener replace(@PathVariable("id") int id, @RequestBody Fourteener mtn, HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			mtn = svc.update(id, mtn);
-			StringBuffer url = req.getRequestURL();
-			String newAddrURL = url.toString();
-			resp.addHeader("URL", newAddrURL);
-		}	catch (Exception e) {
+	public Fourteener update(@PathVariable("id") int id, @RequestBody Fourteener mtn, HttpServletRequest req, HttpServletResponse resp) {
+		Fourteener fourteener = svc.update(id, mtn);
+		if (mtn == null) {
 			resp.setStatus(404);
-			
 		}
-		return mtn;
+		return fourteener;
 	}
 }
