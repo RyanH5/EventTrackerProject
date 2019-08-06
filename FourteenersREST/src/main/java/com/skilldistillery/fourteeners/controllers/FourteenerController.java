@@ -54,23 +54,25 @@ public class FourteenerController {
 	
 	@PostMapping("fourteeners")
 	public Fourteener createFourteener(@RequestBody Fourteener fourteener, HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			System.out.println(fourteener);
-			svc.create(fourteener);
-			System.out.println(fourteener);
-			
-			resp.setStatus(201);
-			StringBuffer url = req.getRequestURL();
-			url.append("/");
-			url.append(fourteener.getId());
-			String newAddrURL = url.toString();
-			resp.addHeader("Location", newAddrURL);
-		}	catch (Exception e) {
-			resp.setStatus(400);
-			fourteener = null;
-		}
+//		Fourteener newFourteener = null;
+//		try {
+//			System.out.println(fourteener);
+////			newFourteener = svc.create(fourteener);
+//			
+//			
+//			resp.setStatus(201);
+//			StringBuffer url = req.getRequestURL();
+//			url.append("/");
+//			url.append(fourteener.getId());
+//			String newAddrURL = url.toString();
+//			resp.addHeader("Location", newAddrURL);
+//		}	catch (Exception e) {
+//			resp.setStatus(400);
+//			fourteener = null;
+//		}
+		System.out.println(fourteener);
 		
-		return fourteener;
+		return svc.create(fourteener);
 	}
 	
 	@PutMapping("fourteeners/{id}")

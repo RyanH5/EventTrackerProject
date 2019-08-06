@@ -39,7 +39,7 @@ public class FourteenerServiceImpl implements FourteenerService {
 			managedFourteener.setComplete(mtn.isComplete());
 			managedFourteener.setElevation(mtn.getElevation());
 			managedFourteener.setPeak(mtn.getPeak());
-			managedFourteener.setRange(mtn.getRange());
+			managedFourteener.setMtnRange(mtn.getMtnRange());
 			managedFourteener.setRank(mtn.getRank());
 		
 			return repo.saveAndFlush(opt.get());
@@ -49,8 +49,9 @@ public class FourteenerServiceImpl implements FourteenerService {
 	
 	@Override
 	public Fourteener create(Fourteener ft) {
-		ft = repo.saveAndFlush(ft);
-		return ft;
+//		ft.setComplete(false);
+		return repo.saveAndFlush(ft);
+		
 	}
 	
 	
