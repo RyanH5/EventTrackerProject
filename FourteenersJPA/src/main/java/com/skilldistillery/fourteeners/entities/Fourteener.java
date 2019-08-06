@@ -11,20 +11,20 @@ public class Fourteener {
 	private int rank;
 	private String peak;
 	private String elevation;
-	private String range;
+	@Column(name="mtn_range")
+	private String mtnRange;
 	private boolean complete;
 	
 	public Fourteener() {
 		super();
 	}
 
-	public Fourteener(int rank, String peak, String elevation, String range, boolean complete) {
-		super();
-		this.rank = rank;
-		this.peak = peak;
-		this.elevation = elevation;
-		this.range = range;
-		this.complete = complete;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getRank() {
@@ -51,12 +51,12 @@ public class Fourteener {
 		this.elevation = elevation;
 	}
 
-	public String getRange() {
-		return range;
+	public String getMtnRange() {
+		return mtnRange;
 	}
 
-	public void setRange(String range) {
-		this.range = range;
+	public void setMtnRange(String mtnRange) {
+		this.mtnRange = mtnRange;
 	}
 
 	public boolean isComplete() {
@@ -67,12 +67,13 @@ public class Fourteener {
 		this.complete = complete;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public Fourteener(int rank, String peak, String elevation, String mtnRange, boolean complete) {
+		super();
+		this.rank = rank;
+		this.peak = peak;
+		this.elevation = elevation;
+		this.mtnRange = mtnRange;
+		this.complete = complete;
 	}
 
 	@Override
@@ -86,15 +87,13 @@ public class Fourteener {
 		builder.append(peak);
 		builder.append(", elevation=");
 		builder.append(elevation);
-		builder.append(", range=");
-		builder.append(range);
+		builder.append(", mtnRange=");
+		builder.append(mtnRange);
 		builder.append(", complete=");
 		builder.append(complete);
 		builder.append("]");
 		return builder.toString();
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -103,8 +102,6 @@ public class Fourteener {
 		result = prime * result + id;
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -119,6 +116,8 @@ public class Fourteener {
 			return false;
 		return true;
 	}
+
+	
 
 	
 	
