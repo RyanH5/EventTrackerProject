@@ -9326,3 +9326,15 @@ Caused by: java.lang.NoSuchMethodException: org.springframework.boot.autoconfigu
 	at java.base/java.lang.Class.getDeclaredConstructor(Class.java:2554)
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:80)
 	... 34 more
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-08-06 13:49:55.081
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.CzVimNhY
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-08-06 13:49:55.082
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.CzVimNhY
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-08-06 13:49:55.083
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2019-08-06 13:49:55.083
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.CzVimNhY => OK
