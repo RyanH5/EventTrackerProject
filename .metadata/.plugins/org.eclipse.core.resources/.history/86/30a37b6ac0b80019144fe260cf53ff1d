@@ -1,0 +1,59 @@
+body {
+	background-image: url("https://www.colorado.com/sites/default/files/Needle-Mtn-View---300-dpi.jpg");
+	background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+}
+.allMtns {
+	float: right;
+    background-color: rgb(167, 133, 103);
+    border: 5px solid rgb(83, 110, 55);
+    width: 200px;
+    height: 90vh;
+    overflow-y: scroll;
+    margin: 0 2vh 2vh;
+    border-radius: 18px;
+}
+.title  {
+	background: rgb(167, 133, 103);
+    margin: 0 0 20px;
+    padding: 10px;
+}
+
+h1, h2, h3, h4, h5 {
+	text-align: center;
+	color: rgb(83, 110, 55);
+	
+}
+
+h1, h2 {
+	pointer-events: none;
+}
+
+
+.main-display {
+	width: 400px;
+	
+}
+
+.main-mtn {
+	background: rgb(167, 133, 103);
+    width: 200px;
+    margin: 400px auto;
+    padding: 10px;
+    border: 5px solid rgb(83, 110, 55);
+    border-radius: 10px;
+}
+
+.red {
+	color: red;
+}
+
+
+
+.mtn-id {
+	display: none;
+}
+
+

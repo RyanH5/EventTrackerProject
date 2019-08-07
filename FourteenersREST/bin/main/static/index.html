@@ -10,8 +10,18 @@
 <body>
   <h1 class="title">FOURTEENERS TRACKER</h1>
   <aside id="allFourteeners" class="allMtns" >
-
   </aside>
+  <form name="newMtnForm" class="newMtnForm">
+  	<span>Create a new 14er</span>
+  	<br>
+  	<input type="text" name="peak" placeholder="Peak"><br>
+  	<input type="number" name="rank" placeholder="Rank"><br>
+  	<input type="text" name="range" placeholder="Range"><br>
+  	<input type="text" name="elevation" placeholder="Elevation"><br>
+  	<label for="complete">Complete: </label>
+  	<input type="checkbox" name="complete" id="complete"><br>
+  	<input type="submit" name="submit-btn" value="Submit Fourteener">
+  </form>
   <div id="user-feedback" class="user-feedback"></div>
   <div id="main-display" class="main-disp"></div>
   
