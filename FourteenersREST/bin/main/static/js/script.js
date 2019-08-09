@@ -80,12 +80,12 @@ function getMountain(e) {
 	   };
 	  
 	   xhr.send(null);
-}
-
+		}
+		
+	
 function displayMountain(mtn) {
 	let display = document.getElementById("main-display");
 	display.textContent = "";
-	
 	
 	let mainMtn = document.createElement("div");
 	mainMtn.classList.add("main-mtn")
@@ -97,6 +97,12 @@ function displayMountain(mtn) {
 	removeBtn.classList.add("rmv");
 	removeBtn.addEventListener("click", removeFourteener);
 	mainMtn.append(removeBtn);
+	
+	let cancelBtn = document.createElement("span");
+	cancelBtn.textContent = "Cancel";
+	cancelBtn.classList.add("cancel");
+	cancelBtn.addEventListener("click", cancelFourteener);
+	mainMtn.append(cancelBtn);
 	
 	let updateBtn = document.createElement("span");
 	updateBtn.textContent = "Update";
@@ -120,7 +126,7 @@ function displayMountain(mtn) {
 	let range = document.createElement("h3");
 	range.textContent = "Range: " + mtn.mtnRange;
 	mainMtn.append(range);
-	console.log(mtn)
+	
 	let elevation = document.createElement("h4");
 	elevation.textContent = "Elevation: " + mtn.elevation;
 	mainMtn.append(elevation);
@@ -160,6 +166,7 @@ function displayMountain(mtn) {
 	let formRange = document.createElement("input");
 	formRange.type = "text";
 	formRange.placeholder = "Range"
+	formRange.name = "range";
 	formRange.value = mtn.mtnRange;
 	form.append(formRange);
 	
@@ -167,6 +174,7 @@ function displayMountain(mtn) {
 	formElevation.type = "text";
 	formElevation.placeholder = "Elevation";
 	formElevation.value = mtn.elevation;
+	formElevation.name = "elevation";
 	form.append(formElevation);
 	
 	let completeLabel = document.createElement("label");
@@ -176,6 +184,7 @@ function displayMountain(mtn) {
 	let formComplete = document.createElement("input");
 	formComplete.type = "checkbox";
 	formComplete.name = "isComplete";
+	formComplete.id = "isComplete";
 	if (mtn.complete) {
 		formComplete.checked = true;
 	}	else {
@@ -186,8 +195,8 @@ function displayMountain(mtn) {
 	let submitUpdateBtn = document.createElement("input");
 	submitUpdateBtn.type = "submit";
 	submitUpdateBtn.value = "Submit";
-	submitUpdateBtn.addEventListener("submit", submitUpdate);
-	
+	submitUpdateBtn.addEventListener("click", submitUpdate);
+	form.append(submitUpdateBtn);
 	
 	
 	mainMtn.append(form);
@@ -250,6 +259,10 @@ function removeFourteener(e) {
 	   location.reload();
 }
 
+function cancelFourteener(e) {
+	e.target.parentNode.remove();
+}
+
 function displayUpdateForm(e){
 	if (e.target.textContent === "Update") {
 		e.target.textContent = "Hide";
@@ -258,58 +271,43 @@ function displayUpdateForm(e){
 		e.target.textContent = "Update";
 		e.target.parentNode.lastChild.classList.add("hidden");
 	}
-	
-
 }
 
-function submitUpdate() {
-//	let id = e.target.nextSibling.innerText;
-//	let xhr = new XMLHttpRequest();
-//	let url = `api/fourteeners/${id}`;
-//	
-//	xhr.open('PUT', url, true);
-//	
-//	xhr.setRequestHeader("Content-type", "application/json");  //status code 415 without this
-//	
-//	   xhr.onreadystatechange = function() {
-//	     if (xhr.readyState === 4 && xhr.status < 400) {
-//	       var data = JSON.parse(xhr.responseText);
-//	       console.log(data)
-//	       
-//	     }
-//	   };
-//	  
-//	   let idEl = e.target.nextSibling.value;
-//	   let rankEl = e.target.nextSibling.nextSibling;
-//	   console.log(rankEl.innerText)
-//	   let peakEl = rankEl.nextSibling;
-//	   let rangeEl = peakEl.nextSibling;
-//	   let elevationEl = rangeEl.nextSibling;
-//	   let completed; 
-//
-//	   if (elevationEl.nextSibling.innerText === "Completed") {
-//		   
-//	   }	else {
-//		   completed = false;
-//	   }
-//	   
-//	   document.newMtnForm.peak.value = peakEl.innerText.split(": ")[1];
-//	   document.newMtnForm.rank.value = parseInt(rankEl.innerText.split(": ")[1]);
-//	   document.newMtnForm.range.value = rangeEl.innerText.split(": ")[1];
-//	   document.newMtnForm.elevation.value = elevationEl.innerText.split(": ")[1];
-//	   
-//	   document.form.formRank.value = parseInt(rankEl.innerText.split(": ")[1]);
-//	   
-//	   let updatedMtn = {
-//			   id: parseInt(id),
-//			   rank: document.newMtnForm.rank.value,
-//			   peak: document.newMtnForm.peak.value,
-//			   mtnRange: rangeEl.innerText.split(": ")[1],
-//			   elevation: document.newMtnForm.elevation.value,
-//			   complete: completed
-//	   }
-//	   console.log(updatedMtn)
-//	   xhr.send(JSON.stringify(updatedMtn));  //dont forget to stringify body before sending
+function submitUpdate(e) {
+	e.preventDefault();
+	let id = e.target.parentNode.parentNode.children[3].innerText;
+	let xhr = new XMLHttpRequest();
+	let url = `api/fourteeners/${id}`;
+	
+	xhr.open('PUT', url, true);
+	
+	xhr.setRequestHeader("Content-type", "application/json");  //status code 415 without this
+	
+	   xhr.onreadystatechange = function() {
+	     if (xhr.readyState === 4 && xhr.status < 400) {
+	       var data = JSON.parse(xhr.responseText);
+	       
+	     }
+	   };
+	  
+	   let isComplete = false;
+	   
+		if (document.getElementById("isComplete").checked) {
+			isComplete = true;
+		}	else {
+			isComplete = false;
+		}
+
+	   let updatedMtn = {
+			   id: parseInt(id),
+			   rank: document.form.rank.value,
+			   peak: document.form.peak.value,
+			   mtnRange: document.form.range.value,
+			   elevation: document.form.elevation.value,
+			   complete: isComplete
+	   }
+	xhr.send(JSON.stringify(updatedMtn));  //dont forget to stringify body before sending
+	e.target.parentNode.parentNode.remove();
 }
 	
 
