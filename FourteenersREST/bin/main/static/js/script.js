@@ -38,9 +38,22 @@ async function getFourteeners(){
 //============================================================
 
 function displayFourteeners(mountains) {
+	console.log(mountains)
+	let totalClimbed = mountains.reduce((sum, mtn) => {
+		if (mtn.complete) {
+			let elevationArr = mtn.elevation.split(",");
+			sum += parseInt(elevationArr[0].concat(elevationArr[1]));
+		}
+		return sum;
+	}, 0);
+	console.log(totalClimbed)
 	
-  let mtnsDisplay = document.getElementById("allFourteeners");
-  mtnsDisplay.textContent = "";
+	let mtnsDisplay = document.getElementById("allFourteeners");
+	mtnsDisplay.textContent = "";
+	
+	let total = document.createElement("h2");
+	total.textContent = "I've climbed a grand total of " + totalClimbed + " ft";
+	mtnsDisplay.append(total);
 
   mountains.forEach(mtn => {
     let fourteener = document.createElement("div");
