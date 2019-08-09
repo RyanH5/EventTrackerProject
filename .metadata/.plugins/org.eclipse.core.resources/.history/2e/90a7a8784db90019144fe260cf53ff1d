@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="main.css">
+  <title>Fourteeners</title>
+</head>
+<body>
+  <h1 class="title">FOURTEENERS TRACKER</h1>
+  <aside id="allFourteeners" class="allMtns" >
+  </aside>
+  <form name="newMtnForm" class="newMtnForm">
+  	<span>Create a new 14er</span>
+  	<input type="text" name="peak" placeholder="Peak"><br>
+  	<input type="number" name="rank" placeholder="Rank"><br>
+  	<input type="text" name="range" placeholder="Range"><br>
+  	<input type="text" name="elevation" placeholder="Elevation"><br>
+  	<label for="complete">Complete: </label>
+  	<input type="checkbox" name="complete" id="complete"><br>
+  	<input type="submit" name="submit-btn" value="Submit Fourteener">
+  </form>
+  <div id="user-feedback" class="user-feedback"></div>
+  <div id="main-display" class="main-disp"></div>
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

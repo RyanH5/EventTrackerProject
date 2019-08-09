@@ -1,0 +1,18 @@
+.allMtns {
+	width: 200px; 
+	float: left; 
+	background-color: lightblue;
+	border: 2px solid gray; 
+	margin: 3px; 
+	width: 200px; 
+	float: left;
+}
+
+h1, h2, h3, h4, h5 {
+	text-align: center;
+	
+}
+
+h1, h2 {
+	pointer-events: none;
+}

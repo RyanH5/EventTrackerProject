@@ -1,0 +1,215 @@
+fourteeners();
+
+//async function getFourteeners(){
+//	let url = "api/fourteeners";
+//	=================================== THIS IS THE SAME AS
+//  let xhr = new XMLHttpRequest();
+//  xhr.open("GET", url, true);
+//
+//  xhr.onreadystatechange = function() {
+//    if(xhr.readyState === 4 && xhr.status < 400) {
+//      let data = JSON.parse(xhr.responseText);
+//      displayFourteeners(data);
+//    }
+//
+//    if(xhr.readyState === 4 && xhr.status >= 400) {
+//      let feedback = document.getElementById("user-feedback");
+//      feedback.textContent = "No Fourteeners found";
+//    }
+//  }
+//  xhr.send(null);
+	
+//	==================================== THIS ******
+	const fourteeners = async () => {
+		let url = "api/fourteeners";
+		const response = await fetch(url);
+		console.log("RESPONSE", response)
+		const data = await response.json();
+		console.log("DATA", data);
+		let result = Promise.resolve(data);
+		console.log("RESULT", result);
+		displayFourteeners(result);
+		return result;
+	}
+//	let mtns = await fourteeners(url);
+
+
+
+function displayFourteeners(mountains) {
+  let mtnsDisplay = document.getElementById("allFourteeners");
+  mtnsDisplay.textContent = "";
+
+  mountains.forEach(mtn => {
+    let fourteener = document.createElement("div");
+    fourteener.classList.add("nav-mtn");
+    
+    let id = document.createElement("span");
+    id.classList.add("mtn-id");
+    id.textContent = mtn.id;
+    fourteener.append(id);
+
+    let rank = document.createElement("h1");
+    rank.textContent = mtn.rank;
+    rank.id = mtn.id;
+    fourteener.addEventListener('click', getMountain);
+    fourteener.append(rank);
+
+    let peak = document.createElement("h2");
+    peak.textContent = mtn.peak;
+    fourteener.append(peak);
+    
+    mtnsDisplay.append(fourteener);
+  });
+}
+
+function getMountain(e) {
+	let id = e.target.firstChild.innerText;
+	let xhr = new XMLHttpRequest();
+	let url = `api/fourteeners/${id}`;
+	
+	xhr.open('GET', url, true);
+	   xhr.onreadystatechange = function() {
+	     if (xhr.readyState === 4 && xhr.status < 400) {
+	       var data = JSON.parse(xhr.responseText);
+	       displayMountain(data);
+	       
+	     }
+	   };
+	  
+	   xhr.send(null);
+}
+
+function displayMountain(mtn) {
+	let display = document.getElementById("main-display");
+	display.textContent = "";
+	
+	
+	let mainMtn = document.createElement("div");
+	mainMtn.classList.add("main-mtn")
+	display.append(mainMtn);
+	mainMtn.textContent = "";
+	
+	let removeBtn = document.createElement("span");
+	removeBtn.textContent = "Remove";
+	removeBtn.classList.add("rmv");
+	removeBtn.addEventListener("click", removeFourteener);
+	mainMtn.append(removeBtn);
+	
+	let updateBtn = document.createElement("span");
+	updateBtn.textContent = "Update";
+	updateBtn.classList.add("update");
+	updateBtn.addEventListener("click", updateFourteener);
+	mainMtn.append(updateBtn);
+	
+	let id = document.createElement("span");
+    id.classList.add("mtn-id");
+    id.textContent = mtn.id;
+    mainMtn.append(id);
+
+	let rank = document.createElement("h1");
+	rank.textContent = "RANK: " + mtn.rank;
+	mainMtn.append(rank);
+	
+	let peak = document.createElement("h2");
+	peak.textContent = "PEAK: " + mtn.peak;
+	mainMtn.append(peak);
+	
+	let range = document.createElement("h3");
+	range.textContent = "Range: " + mtn.mtnRange;
+	mainMtn.append(range);
+	
+	let elevation = document.createElement("h4");
+	elevation.textContent = "Elevation: " + mtn.elevation;
+	mainMtn.append(elevation);
+	
+	let complete = document.createElement("h5");
+	if (mtn.complete) {
+		complete.textContent = "Completed";
+	}	else {
+		complete.textContent = "Not Completed";
+		complete.classList.add("red");
+	}
+	mainMtn.append(complete);
+}
+
+document.newMtnForm.addEventListener("submit", postFourteener);
+function postFourteener(e) {
+	e.preventDefault();
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'api/fourteeners', true);
+
+	xhr.setRequestHeader("Content-type", "application/json"); 
+
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState === 4 ) {
+	    if ( xhr.status == 200 || xhr.status == 201 ) { 
+	      var data = JSON.parse(xhr.responseText);
+	      
+	    }
+	    else {
+	      console.log("POST request failed.");
+	      console.error(xhr.status + ': ' + xhr.responseText);
+	    }
+	  }
+	};
+
+	let isComplete = false;
+	if (document.newMtnForm.complete.value === "on") {
+		isComplete = true;
+	}	
+	
+	var newMtn = {
+			peak: document.newMtnForm.peak.value,
+			rank: document.newMtnForm.rank.value,
+			mtnRange: document.newMtnForm.range.value,
+			elevation: document.newMtnForm.elevation.value,
+			complete: isComplete
+	}
+	var newMtnJson = JSON.stringify(newMtn); 
+
+	xhr.send(newMtnJson);
+	location.reload();
+}
+
+function removeFourteener(e) {
+	let id = e.target.nextSibling.nextSibling.innerText;
+	
+	let xhr = new XMLHttpRequest();
+	let url = `api/fourteeners/${id}`;
+	
+	xhr.open('DELETE', url, true);
+	   xhr.onreadystatechange = function() {
+	     if (xhr.readyState === 4 && xhr.status < 400) {
+	       var data = JSON.parse(xhr.responseText);
+//	       displayMountain(data);
+	       
+	     }
+	   };
+	  
+	   xhr.send(null);
+	   location.reload();
+}
+
+function updateFourteener(e){
+	debugger;
+	e.preventDefault();
+	let id = e.target.nextSibling.innerText;
+	let xhr = new XMLHttpRequest();
+	let url = `api/fourteeners/${id}`;
+	
+	xhr.open('PUT', url, true);
+	   xhr.onreadystatechange = function() {
+	     if (xhr.readyState === 4 && xhr.status < 400) {
+	       var data = JSON.parse(xhr.responseText);
+	       console.log(data)
+	       
+	     }
+	   };
+	  
+	   xhr.send(null);
+//	   location.reload();
+	
+}
+	
+
+

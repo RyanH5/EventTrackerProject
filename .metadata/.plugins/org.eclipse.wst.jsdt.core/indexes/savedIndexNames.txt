@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+/Users/ryanharrington/SD/Java/Fourteeners/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+941269343.index
+3813334174.index
+3694501607.index
+387106440.index
+2780233368.index
