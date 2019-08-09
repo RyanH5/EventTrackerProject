@@ -308,6 +308,7 @@ function submitUpdate(e) {
 	   }
 	xhr.send(JSON.stringify(updatedMtn));  //dont forget to stringify body before sending
 	e.target.parentNode.parentNode.remove();
+	location.reload();
 }
 	
 
